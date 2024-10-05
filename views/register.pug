@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title Registrar Paciente
+    link(rel="stylesheet", href="/styles.css")  // Aquí puedes agregar un archivo CSS si lo deseas
+  body
+    h1 Registrar Paciente
+    
+    // Si hay mensajes de error, los mostramos aquí
+    if errors
+      ul
+        each error in errors
+          li.error-message #{error.msg}
+
+    form(action="/patients/register" method="POST")
+      div
+        label(for="nombre_completo") Nombre Completo:
+        // Si hay un error en este campo, lo mostramos aquí
+        if errors && errors.find(e => e.param === 'nombre_completo')
+          span.error-message Nombre completo es obligatorio.
+        input(type="text" name="nombre_completo" required value=(typeof formData !== 'undefined' ? formData.nombre_completo : ''))
+
+      div
+        label(for="dni") DNI:
+        if errors && errors.find(e => e.param === 'dni')
+          span.error-message DNI es obligatorio o inválido.
+        input(type="text" name="dni" required value=(typeof formData !== 'undefined' ? formData.dni : ''))
+
+      div
+        label(for="obra_social") Obra Social:
+        input(type="text" name="obra_social" value=(typeof formData !== 'undefined' ? formData.obra_social : ''))
+
+      div
+        label(for="telefono") Teléfono:
+        if errors && errors.find(e => e.param === 'telefono')
+          span.error-message Teléfono es obligatorio o inválido.
+        input(type="text" name="telefono" required value=(typeof formData !== 'undefined' ? formData.telefono : ''))
+
+      div
+        label(for="email") Email:
+        if errors && errors.find(e => e.param === 'email')
+          span.error-message Email es obligatorio o inválido.
+        input(type="email" name="email" required value=(typeof formData !== 'undefined' ? formData.email : ''))
+
+      div
+        button(type="submit") Registrar
+        
+    a(href="/patients/list") Ver lista de pacientes

@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Editar Paciente
+    form(action=`/patients/edit/${patient.id}` method="POST")
+      div
+        label(for="nombre_completo") Nombre Completo:
+        input(type="text" name="nombre_completo" value=patient.nombre_completo required)
+      div
+        label(for="dni") DNI:
+        input(type="text" name="dni" value=patient.dni required)
+      div
+        label(for="obra_social") Obra Social:
+        input(type="text" name="obra_social" value=patient.obra_social)
+      div
+        label(for="telefono") Teléfono:
+        input(type="text" name="telefono" value=patient.telefono required)
+      div
+        label(for="email") Email:
+        input(type="email" name="email" value=patient.email required)
+      div
+        button(type="submit") Actualizar
+    a(href="/patients/list") Cancelar

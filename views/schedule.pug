@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Programar Cita
+    form(action="/appointments/schedule" method="POST")
+      div
+        label(for="paciente_id") Paciente:
+        select(name="paciente_id" required)
+          each patient in patients
+            option(value=patient.id)= patient.nombre_completo
+      div
+        label(for="fecha") Fecha:
+        input(type="date" name="fecha" required)
+      div
+        label(for="hora") Hora:
+        input(type="time" name="hora" required)
+      div
+        label(for="descripcion") Descripción:
+        input(type="text" name="descripcion")
+      div
+        button(type="submit") Programar
+    a(href="/appointments/list") Ver citas programadas

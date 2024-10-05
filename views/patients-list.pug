@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/styles.css")  // Incluye tu archivo CSS si lo tienes
+  body
+    h1= title
+    table
+      thead
+        tr
+          th ID
+          th Nombre Completo
+          th DNI
+          th Obra Social
+          th Teléfono
+          th Email
+          th Fecha de Registro
+          th Acciones
+      tbody
+        if patients.length
+          each patient in patients
+            tr
+              td= patient.id
+              td= patient.nombre_completo
+              td= patient.dni
+              td= patient.obra_social
+              td= patient.telefono
+              td= patient.email
+              // Formatear la fecha a un formato más legible
+              td= new Date(patient.fecha_registro).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
+              td
+                a(href=`/patients/edit/${patient.id}`) Editar
+                |  |  
+                a(href=`/patients/delete/${patient.id}` onclick="return confirm('¿Estás seguro de eliminar este paciente?')") Eliminar
+        else
+          tr
+            td(colspan="8") No hay pacientes registrados aún.
+    
+    a(href="/patients/register") Registrar nuevo paciente

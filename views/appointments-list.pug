@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Lista de Citas
+    table
+      thead
+        tr
+          th ID
+          th Paciente
+          th Fecha
+          th Hora
+          th Descripción
+      tbody
+        each appointment in appointments
+          tr
+            td= appointment.id
+            td= appointment.nombre_completo
+            td= appointment.fecha
+            td= appointment.hora
+            td= appointment.descripcion
+    a(href="/appointments/schedule") Programar nueva cita
